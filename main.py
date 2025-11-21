@@ -3,15 +3,14 @@
 import simulated_bomb, image_scanner, timer_ascii_art
 
 import tkinter as tk
-from tkinter import ttk
 
-import threading, time
+import threading
 
 class BombDefusalGUI:
     def __init__(self, root, bomb_timer):
         self.root = root
         self.bomb = bomb_timer
-        self.correct_code = "1234"
+        self.correct_code = "1234" # TODO: change this later
         
         self.root.title("Operation Defusal")
         self.root.geometry("600x500")
@@ -58,7 +57,7 @@ class BombDefusalGUI:
         self.result_label.pack(pady=10)
     
     def check_code(self):
-        """Check if entered code is correct"""
+        print("Check if entered code is correct")
         entered_code = self.code_entry.get()
         
         if self.bomb.status == "detonated":
@@ -88,7 +87,6 @@ class BombDefusalGUI:
             print("✗ Incorrect defusal code entered.")
     
     def handle_bomb_event(self, event, *args):
-        """Handle events from bomb timer"""
         if event == "timer_update":
             time_left = args[0]
             # Update timer display 
@@ -101,7 +99,6 @@ class BombDefusalGUI:
                 self.root.after(0, lambda: self.timer_label.config(fg="#ffaa00"))
         
         elif event == "detonated":
-            # Bomb exploded
             self.root.after(0, lambda: self.timer_label.config(text="BOOM!", fg="#ff0000"))
             self.root.after(0, lambda: self.status_label.config(text="DETONATED!", fg="#ff0000"))
             self.root.after(0, lambda: self.code_entry.config(state="disabled", bg="#ffcccc"))

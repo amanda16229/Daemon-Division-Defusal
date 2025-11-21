@@ -15,7 +15,6 @@ class BombTimer:
         self.running = False
     
     def start_countdown(self, callback=None):
-        """Non-blocking countdown"""
         self.status = "active"
         self.running = True
         
