@@ -57,7 +57,6 @@ class BombDefusalGUI:
         self.result_label.pack(pady=10)
     
     def check_code(self):
-        print("Check if entered code is correct")
         entered_code = self.code_entry.get()
         
         if self.bomb.status == "detonated":
@@ -93,10 +92,16 @@ class BombDefusalGUI:
             self.root.after(0, lambda: self.timer_label.config(text=f"TIME: {time_left}s"))
             
             # Change color as time runs out
-            if time_left <= 3:
+            if time_left <= 60:
                 self.root.after(0, lambda: self.timer_label.config(fg="#ff0000"))
-            elif time_left <= 5:
-                self.root.after(0, lambda: self.timer_label.config(fg="#ffaa00"))
+            elif time_left <= 120:
+                self.root.after(0, lambda: self.timer_label.config(fg="#ffb300"))
+            elif time_left <= 180:
+                self.root.after(0, lambda: self.timer_label.config(fg="#f2ff00"))
+            elif time_left <= 240:
+                self.root.after(0, lambda: self.timer_label.config(fg="#b3ff00"))
+            elif time_left <= 300:
+                self.root.after(0, lambda: self.timer_label.config(fg="#80ff00"))
         
         elif event == "detonated":
             self.root.after(0, lambda: self.timer_label.config(text="BOOM!", fg="#ff0000"))

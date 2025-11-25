@@ -44,6 +44,8 @@ class BombTimer:
                 
             
             if self.defused:
+                print(timer_ascii_art.bomb_defused)
+                print("YAY! Bomb defused successfully!")
                 self.status = "defused"
                 if callback:
                     callback("defused")
