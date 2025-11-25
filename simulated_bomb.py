@@ -8,10 +8,10 @@ import timer_ascii_art
 
 
 class BombTimer:
-    def __init__(self):
+    def __init__(self): # initialize bomb timer object
         self.status = "inactive"
         self.defused = False
-        self.time_remaining = 10
+        self.time_remaining = 300 # TODO: set desired countdown time
         self.running = False
     
     def start_countdown(self, callback=None):
@@ -27,10 +27,21 @@ class BombTimer:
             print(f"Bomb will detonate in {self.time_remaining} seconds!")
             
             while self.time_remaining > 0 and self.running and not self.defused:
+
+
+                if self.time_remaining % 60 == 0:
+                    minutes = self.time_remaining // 60
+                    print(timer_ascii_art.bomb)
+                    print(f"\n--- {minutes} minute{'s' if minutes > 1 else ''} remaining ---")
+                elif self.time_remaining % 10 == 0:
+                    print(f"\n--- {self.time_remaining} seconds remaining ---")
+                             
                 time.sleep(1)
                 self.time_remaining -= 1
+
                 if callback:
                     callback("timer_update", self.time_remaining)
+                
             
             if self.defused:
                 self.status = "defused"

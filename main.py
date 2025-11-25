@@ -30,7 +30,7 @@ class BombDefusalGUI:
         tk.Label(mainframe, text="⚠️ BOMB DEFUSAL ⚠️", font=("Courier", 20, "bold"), bg="#1a1a1a", fg="#ff0000").pack(pady=10)
         
         # Timer display
-        self.timer_label = tk.Label(mainframe, text="TIME: 10s", font=("Courier", 48, "bold"), bg="black", fg="#ffffff", padx=20, pady=20)
+        self.timer_label = tk.Label(mainframe, text="TIME: 5 min", font=("Courier", 48, "bold"), bg="black", fg="#ffffff", padx=20, pady=20)
         self.timer_label.pack(pady=20)
         
         # Status display
