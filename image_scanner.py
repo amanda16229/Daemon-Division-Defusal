@@ -29,7 +29,7 @@ def scan_for_password():
     Tk().withdraw()
     file_path = filedialog.askopenfilename(
         title="Select an image file",
-        filetypes=[("Image files", "*.png;*.jpg;*.jpeg;*.bmp;*.JFIF")]
+        filetypes=[("All files", "*.*")]
     )
 
     if not file_path:
