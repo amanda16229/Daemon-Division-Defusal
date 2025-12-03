@@ -12,7 +12,7 @@ class BombDefusalGUI:
     def __init__(self, root, bomb_timer, correct_code=None):
         self.root = root
         self.bomb = bomb_timer
-        self.correct_code = correct_code or "0000" # fallback, should scan fail
+        self.correct_code = "lowkeytiredfr"
         
         self.root.title("Operation Defusal")
         self.root.geometry("600x500")
