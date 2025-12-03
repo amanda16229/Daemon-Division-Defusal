@@ -22,8 +22,7 @@ def atbash_cipher(text):
 SEARCH_PHRASE = atbash_cipher("password:")
 PASSWORD_WORD_ATBASH = atbash_cipher("password")
 
-pytesseract.pytesseract.tesseract_cmd = "/opt/homebrew/bin/tesseract"
-  # Update this path as needed
+pytesseract.pytesseract.tesseract_cmd = "/opt/homebrew/bin/tesseract" # WILL HAVE TO CHANGE TO YOUR PYTESSERACT EXECUTABLE
 
 def scan_for_password():
     Tk().withdraw()
