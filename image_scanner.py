@@ -22,7 +22,47 @@ def atbash_cipher(text):
 SEARCH_PHRASE = atbash_cipher("password:")
 PASSWORD_WORD_ATBASH = atbash_cipher("password")
 
-pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'  # Update this path as needed
+pytesseract.pytesseract.tesseract_cmd = "/opt/homebrew/bin/tesseract"
+  # Update this path as needed
+
+def scan_for_password():
+    Tk().withdraw()
+    file_path = filedialog.askopenfilename(
+        title="Select an image file",
+        filetypes=[("Image files", "*.png;*.jpg;*.jpeg;*.bmp;*.JFIF")]
+    )
+
+    if not file_path:
+        print("No image file selected.")
+        return None
+
+    img = Image.open(file_path)
+    img = img.convert('L')
+    img = ImageEnhance.Contrast(img).enhance(2)
+    img = img.filter(ImageFilter.SHARPEN)
+
+    text = pytesseract.image_to_string(img)
+    print(text)  # debug
+
+    encoded_password = None
+    for line in text.splitlines():
+        if SEARCH_PHRASE in line:
+            parts = line.split(PASSWORD_WORD_ATBASH)
+            if len(parts) > 1:
+                raw_extracted = parts[-1].strip()
+                if raw_extracted.startswith(':'):
+                    raw_extracted = raw_extracted[1:].strip()
+                encoded_password = raw_extracted
+                break
+
+    if encoded_password:
+        decrypted_password = atbash_cipher(encoded_password)
+        print(f"Decrypted Password: {decrypted_password}")
+        return decrypted_password
+    else:
+        print("No password found.")
+        return None
+
 
 Tk().withdraw()
 file_path = filedialog.askopenfilename(title="Select an image file", filetypes=[("Image files", "*.png;*.jpg;*.jpeg;*.bmp;*.JFIF")])
