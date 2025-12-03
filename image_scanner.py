@@ -33,7 +33,7 @@ if file_path:
 
     # preprocess image for better OCR results
     img = img.convert('L') # grayscale
-    img = ImageEnhance.Contrast(img).ehnance(2) # contrast increase
+    img = ImageEnhance.Contrast(img).enhance(2) # contrast increase
     img = img.filter(ImageFilter.SHARPEN) # sharpen image
 
     text = pytesseract.image_to_string(img)
