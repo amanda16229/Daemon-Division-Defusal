@@ -10,7 +10,7 @@ class BombDefusalGUI:
     def __init__(self, root, bomb_timer):
         self.root = root
         self.bomb = bomb_timer
-        self.correct_code = "1234" # TODO: change this later
+        self.correct_code = correct_code or "0000" # fallback, should scan fail
         
         self.root.title("Operation Defusal")
         self.root.geometry("600x500")
@@ -116,6 +116,9 @@ class BombDefusalGUI:
 def run_gui():
     bomb = simulated_bomb.BombTimer()
     root = tk.Tk()
+
+    scanned_code = image_scanner.scan_for_password() # scan image for password
+    
     app = BombDefusalGUI(root, bomb)
     root.mainloop()
 
