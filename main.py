@@ -63,9 +63,10 @@ class BombDefusalGUI:
         self.scan_btn.pack(pady=10)
     
     def run_scanner(self):
-        decrypted = image_scanner.scan_for_password()
-        if decrypted:
-            answer = msgbox.askyesno("Decrypt?", "Decrypt the password?")
+        result = image_scanner.scan_for_password()
+        if result:
+            encoded, decrypted = result
+            answer = msgbox.askyesno("Decrypt?", f"Encoded password found: {encoded}\nDecrypt it?")
             if answer:
                 msgbox.showinfo("Decrypted Password", f"Decrypted password: {decrypted}")
                 self.correct_code = decrypted
