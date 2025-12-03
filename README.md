@@ -17,3 +17,6 @@ To Run:
 1. git clone https://github.com/amanda16229/Daemon-Division-Defusal.git
 2. cd Daemon-Division-Defusal
 3. python3 main.py
+
+To Find the Correct Password:
+Use "bomb defusal pass.png"! (You'll need to download it first!)
