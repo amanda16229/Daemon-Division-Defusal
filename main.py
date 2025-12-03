@@ -6,8 +6,10 @@ import tkinter as tk
 
 import threading
 
+import tkinter.messagebox as msgbox
+
 class BombDefusalGUI:
-    def __init__(self, root, bomb_timer):
+    def __init__(self, root, bomb_timer, correct_code=None):
         self.root = root
         self.bomb = bomb_timer
         self.correct_code = correct_code or "0000" # fallback, should scan fail
@@ -55,6 +57,20 @@ class BombDefusalGUI:
         # Result message
         self.result_label = tk.Label(mainframe, text="", font=("Arial", 12, "bold"), bg="#1a1a1a")
         self.result_label.pack(pady=10)
+
+        # Scanner button
+        self.scan_btn = tk.Button(mainframe, text="SCAN IMAGE", command=self.run_scanner, font=("Arial", 12, "bold"), bg="#0066cc", fg="white", width=20, height=2)
+        self.scan_btn.pack(pady=10)
+    
+    def run_scanner(self):
+        decrypted = image_scanner.scan_for_password()
+        if decrypted:
+            answer = msgbox.askyesno("Decrypt?", "Decrypt the password?")
+            if answer:
+                msgbox.showinfo("Decrypted Password", f"Decrypted password: {decrypted}")
+                self.correct_code = decrypted
+            else:
+                msgbox.showinfo("Scanner Output", "Encrypted password found. Copy manually if needed.")
     
     def check_code(self):
         entered_code = self.code_entry.get()
@@ -112,13 +128,9 @@ class BombDefusalGUI:
             self.root.after(0, lambda: self.result_label.config(text="GAME OVER!", fg="#ff0000"))
         
 
-
 def run_gui():
     bomb = simulated_bomb.BombTimer()
     root = tk.Tk()
-
-    scanned_code = image_scanner.scan_for_password() # scan image for password
-    
     app = BombDefusalGUI(root, bomb)
     root.mainloop()
 
