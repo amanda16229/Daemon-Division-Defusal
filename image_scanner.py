@@ -60,9 +60,3 @@ def scan_for_password():
     else:
         print("No password found.")
         return None
-
-if __name__ == "__main__":
-    result = scan_for_password()
-    if result:
-        encoded, decrypted = result
-        print(f"Standalone run -> Encoded: {encoded}, Decrypted: {decrypted}")
