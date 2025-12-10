@@ -1,6 +1,8 @@
+# image_scanner.py
+
 from PIL import Image, ImageEnhance, ImageFilter
 import pytesseract
-from tkinter import Tk, filedialog
+from tkinter import filedialog
 import string
 
 def atbash_cipher(text):
@@ -18,11 +20,10 @@ def atbash_cipher(text):
 SEARCH_PHRASE = atbash_cipher("password:")
 PASSWORD_WORD_ATBASH = atbash_cipher("password")
 
-# YOU'LL NEED TO UPDATE THE PATH TO *YOUR* PYTESSERACT EXECUTABLE
-pytesseract.pytesseract.tesseract_cmd = "/opt/homebrew/bin/tesseract"
+# Update this path to your Tesseract installation
+pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
 
 def scan_for_password():
-    Tk().withdraw()
     file_path = filedialog.askopenfilename(
         title="Select an image file",
         filetypes=[("Image files", "*.png;*.jpg;*.jpeg;*.bmp;*.jfif"), ("All files", "*.*")]
@@ -59,3 +60,9 @@ def scan_for_password():
     else:
         print("No password found.")
         return None
+
+if __name__ == "__main__":
+    result = scan_for_password()
+    if result:
+        encoded, decrypted = result
+        print(f"Standalone run -> Encoded: {encoded}, Decrypted: {decrypted}")
